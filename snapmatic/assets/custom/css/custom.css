@@ -1,0 +1,14 @@
+.profile-picture
+{
+	margin-top: 20px;
+	border-radius: 100%;
+
+}
+.edit-profile
+{
+	border-radius: 10px;
+	width: 25%;
+	font-family: Arial;
+	font-size: 20px;
+	margin: 25px 25px 25px 25px;
+}
