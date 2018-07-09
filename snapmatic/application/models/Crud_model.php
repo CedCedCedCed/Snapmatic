@@ -141,7 +141,8 @@ class Crud_model extends CI_Model{
 		$result = $this->db->get();
 		return $result->result();
 	}
-	public function count_result($tag,$table,$where){
+	public function count_result($tag,$table,$where)
+	{
 		$this->db->select($tag);
 		$this->db->from($table);
 		$this->db->where($where);
@@ -149,5 +150,17 @@ class Crud_model extends CI_Model{
 		return $num_results;
 
 	}
-	
+	public function user_exists($table,$where)
+	{	
+		$this->db->where($where);
+		$query = $this->db->get($table);
+		if($query->num_rows >= 1)
+		{
+			return $query->row();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
 }

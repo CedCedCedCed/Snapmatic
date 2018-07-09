@@ -46,20 +46,19 @@ class View extends MY_Controller
 
 					
 
-					case $username:
-							$id = $this->session->user_id;
-							$where = array('user_id',$id);
+					// case $username:
+					// 		$id = $this->session->user_id;
+					// 		$where = array('user_id',$id);
 							
-							parent::mainpage('user/profile/view-profile',
-						        [   
-						        	'title'				=> 'Snapmatic',
-						        	'photos'			=> $this->Crud_model->fetch_tag('*','newsfeed',$where)
+					// 		parent::mainpage('user/profile/view-profile',
+					// 	        [   
+					// 	        	'title'				=> 'Snapmatic',
+					// 	        	'photos'			=> $this->Crud_model->fetch_tag('*','newsfeed',$where)
 
-						        ]
-					        );
+					// 	        ]
+					//         );
 							
-							
-						break;
+					// 	break;
 
 					case 'following':
 							$this->check_login();
@@ -96,7 +95,36 @@ class View extends MY_Controller
 							);
 						break;
 					
+					case $page:
+						
+							$explode_name = explode('.', $page);
+							$first_name = $explode_name[0];
+							$last_name = $explode_name[1];
+							$where_name = array(
+								'first_name' => $first_name,
+								'last_name'	 => $last_name
 
+							);
+							$get_info = $this->Crud_model->fetch_tag_row('*','users',$where_name);
+							$id = $get_info->id;
+							$account = array('user_id' => $id);
+							$where_username = array('username' => $username);
+							$where_following = array('user_following' => $id);
+							$where_follower = array('user_followed' => $id);
+			        		$check_following = $this->Crud_model->count_result('*','following',$where_following);
+			        		$check_follower= $this->Crud_model->count_result('*','follower',$where_follower);
+							parent::mainpage('user/profile/view-profile',
+						        [   
+						        	'title'				=> 'Snapmatic',
+						        	'account'			=> $get_info,		
+						        	'following'			=> $check_following,		
+						        	'follower'			=> $check_follower,		
+						        	'photos'			=> $this->Crud_model->fetch_tag('*','newsfeed',$account)
+
+						        ]
+					        );
+
+						break;
 					default:
 							echo "wala sa choicesss";
 						break;

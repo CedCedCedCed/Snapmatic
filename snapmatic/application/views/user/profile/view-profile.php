@@ -16,15 +16,22 @@
         <div class="col-md-8">
           <br><br><a href="<?= base_url().'user/edit/'.$username ."/profile"?>"><button class="edit-profile btn btn-primary">Edit Profile</button></a>
           <a href="<?= base_url().'user/edit/'.$username ."/profile"?>"><i class="fa fa-gear" style="font-size:36px;"></i></a><br>
-          <a href="<?= base_url().'user/follower'?>"><button class="edit-profile btn btn-primary">Followers</button></a>
-           <a href="<?= base_url().'user/following'?>"><button class="edit-profile btn btn-primary">Following</button></a>
+          <?php $page = $this->uri->segment(2);
+            if($page != $username){
+
+            } 
+          else{
+          ?>
+           <a href="<?= base_url().'user/follower'?>"><button class="edit-profile btn btn-primary"><?= $follower?> Followers</button></a>
+           <a href="<?= base_url().'user/following'?>"><button class="edit-profile btn btn-primary"><?= $following?> Following</button></a>
+          <?php }?>
         </div>
        
       </div>
     </div>
    
 
-    <h1 class="my-8"><?= $this->session->fullname?></h1>
+    <h1 class="my-8"><?= $account->first_name . " " . $account->last_name?></h1>
     <div class="row">
       <!-- Blog Post -->
       <div class="col-md-4">

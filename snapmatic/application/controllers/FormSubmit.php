@@ -160,17 +160,27 @@ class FormSubmit extends MY_Controller
 			        	$this->session->set_userdata('names',$name);
 			        	$session = $this->session->userdata('names');
 			        	$this->session->fullname = $session['first_name'] .' '. $session['last_name'];
-
-			            $update_account = array(
+			        	$username = clean_data($_POST['username']);
+			        	$where_username = array('username' => $username);
+			        	$check_username = $this->Crud_model->count_result('username','users',$where_username);
+			        	if($check_username >= 1)
+			        	{
+			        		echo json_encode("existed");
+			        	}
+			        	else
+			        	{
+			        		 $update_account = array(
 			                'first_name'              => clean_data(ucwords($this->input->post('first_name'))),
 			                'last_name'               => clean_data(ucwords($this->input->post('last_name'))),
 			                'username'                => clean_data($this->input->post('username')),
 			                'email'                   => $this->input->post('email')
 			 
-			            );
+				            );
+				           
+				            $this->Crud_model->update('users',$update_account,$where);
+				            echo json_encode("success");
+			        	}
 			           
-			            $this->Crud_model->update('users',$update_account,$where);
-			            echo json_encode("success");
 			        }
 					break;
 			default:

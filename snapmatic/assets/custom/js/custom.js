@@ -93,6 +93,11 @@ $(document).ready(function(){
                     $("h5").html("");
                     success_message("#success-message-edit-profile","Edit Successfully!");
                     window.setTimeout(function(){location.href=base_url+"user/"},2000);
+                }
+                else if(result === "existed")
+                {
+                    $("h5").html("");
+                    success_message("#success-message-edit-profile","Username already taken");
                 }else{
                     
                     $("#first_name_error").html(result.first_name_error);

@@ -111,6 +111,26 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Contact</a>
           </li>
+        <?php elseif($page != $name):?>
+           <li class="nav-item active">
+             <a class="nav-link" href="<?= base_url().'user/explore'?>"><i class="fa fa-compass fa-lg" aria-hidden="true" ></i></a>
+            <span class="sr-only">(current)</span>
+
+            </li>
+          <li class="nav-item">
+              <a class="nav-link" href="<?= base_url().'user/'.$username?>"><?= $this->session->fullname ?></a>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url().'user/'?>">Home</a>
+          </li>
+         
+          <li class="nav-item">
+            <a class="nav-link" href="#">Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
 
 
 

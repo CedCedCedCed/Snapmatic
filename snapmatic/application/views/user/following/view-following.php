@@ -15,13 +15,17 @@
 
       <div class="col-md-5">
         <br>
-         <?php foreach ($following as $row):?>
-        <img class="profile-picture"src="<?= base_url().'assets/'.$row->profile_picture?>" alt="Card image cap" style="width:200px">
+         <?php foreach ($following as $row):
+          $first_last_name = $row->first_name . " " . $row->last_name;
+          $fullname = strtolower(str_replace(' ', '.', $first_last_name));
+
+         ?>
+        <img class="profile-picture" src="<?= base_url().'assets/'.$row->profile_picture?>" alt="Card image cap" style="width:200px">
         
         <div class="card-body">
          
-            <label><?= $row->first_name . " " . $row->last_name?></label>
-           
+            <label><?= $first_last_name?></label>
+            <a href="<?= base_url().'user/'.$fullname?>" ><button class="btn btn-primary">View Profile</button>
           
           <?php endforeach;?>
 
